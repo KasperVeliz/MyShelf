@@ -1,0 +1,12 @@
+.shelf-container {
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+}
+
+.book-container {
+    background-color: black;
+    width: 180px;
+    height: 288px;
+    margin: 20px;
+}
