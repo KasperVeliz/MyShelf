@@ -1,13 +1,16 @@
+import Book from './Book.jsx'
+
 import './Shelf.css'
 
-function Shelf(){
+function Shelf(props){
     return(
         <>
+        <div className='title-container'>
+            {props.shelfName}
+        </div>
         <div className="shelf-container">
 
-            <div className="book-container">
-                PlaceHolder
-            </div>
+            <Book bookName='Little Red Ridinghood'/>
 
             <div className="book-container">
                 PlaceHolder
