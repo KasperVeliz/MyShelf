@@ -1,0 +1,21 @@
+#searchBy {
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 15px;
+}
+
+.search-bar {
+    width: 60%;
+    padding: 10px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: grey;
+    border-style: solid;
+}
+
+#submit {
+    padding: 10px;
+    margin-left: 20px;
+    border-radius: 15px;
+    border-width: 2px;
+}
