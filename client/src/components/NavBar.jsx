@@ -18,11 +18,15 @@ function NavBar(props){
     return(
         <div className='nav-bar'>
             <h1>My Shelf</h1>
-            
+            <p>Your personal librarian</p>
+            <br></br>
+
             <div className='search-bar-container'>
                 <form onSubmit={(event) => {
+                    setSearchTerm(searchTerm.replaceAll(' ', '+'))
                     event.preventDefault()
                     props.onSearchBooks({filter,searchTerm})
+                    setSearchTerm(searchTerm.replaceAll('+', ' '))
                 }}>
                     <select name='options' id='searchBy' onChange={handleFilter}>
                         <option value='title'>Title</option>

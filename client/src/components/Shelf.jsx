@@ -10,19 +10,9 @@ function Shelf(props){
         </div>
         <div className="shelf-container">
 
-            <Book bookName='Little Red Ridinghood'/>
-
-            <div className="book-container">
-                PlaceHolder
-            </div>
-
-            <div className="book-container">
-                PlaceHolder
-            </div>
-
-            <div className="book-container">
-                PlaceHolder
-            </div>
+            <Book />
+            <Book />
+            <Book />
 
         </div>
         </>

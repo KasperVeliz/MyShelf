@@ -3,4 +3,18 @@
     width: 180px;
     height: 288px;
     margin: 20px;
+    display: flex;
+}
+
+.title {
+    font-weight: bold;
+    text-shadow: 2px;
+}
+
+.author {
+    align-self: flex-end;
+}
+
+.meta {
+    text-align: center;
 }

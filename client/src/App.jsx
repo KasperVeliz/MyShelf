@@ -1,5 +1,6 @@
 import Shelf from './components/Shelf'
 import NavBar from './components/NavBar'
+import SearchResults from './components/SearchResults'
 
 import './App.css'
 import { useState } from 'react'
@@ -16,7 +17,6 @@ function App() {
         const response = await fetch(`https://openlibrary.org/search.json?q=${term}`)
         let jsonData = await response.json()
         setSearchResult(jsonData.docs.slice(0,5))
-        console.log(searchResult)
       }
     }
     catch(error){
@@ -32,11 +32,10 @@ function App() {
     <>
       <NavBar onSearchBooks={handleSearchBooks}/>
       <div>
-        <p>Your personal librarian</p>
+        <SearchResults searchData={searchResult}/>
         <Shelf shelfName='Library'/>
         <Shelf shelfName='Wishlist'/>
       </div>
-      
     </>
   )
 }
