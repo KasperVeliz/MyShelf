@@ -6,7 +6,7 @@ function Shelf(props){
     return(
         <>
         <div className='title-container'>
-            {props.shelfName}
+            <h3>{props.shelfName}</h3>
         </div>
         <div className="shelf-container">
 

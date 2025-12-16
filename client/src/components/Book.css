@@ -17,4 +17,12 @@
 
 .meta {
     text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 180px;
+}
+
+img {
+    width: 180px;
+    height: 288px;
 }

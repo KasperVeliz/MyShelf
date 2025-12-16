@@ -14,3 +14,12 @@ button:hover {
     background-color: rgb(0, 215, 0);
     transition: 1s;
 }
+
+.result {
+    flex-direction: column;
+    min-height: fit-content;
+}
+
+.buttons {
+    align-self: flex-end;
+}

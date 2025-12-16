@@ -18,6 +18,15 @@ function App() {
         let jsonData = await response.json()
         setSearchResult(jsonData.docs.slice(0,5))
       }
+      else if (filter == 'author'){
+        const response = await fetch(`https://openlibrary.org/search/authors.json?q=${term}`)
+        let jsonData = await response.json()
+        jsonData = jsonData.docs[0].key
+        const res = await fetch(`https://openlibrary.org/search.json?q=${jsonData}`)
+        jsonData = await res.json()
+        setSearchResult(jsonData.docs.slice(0,5))
+        console.log(searchResult)
+      }
     }
     catch(error){
       console.log(error)

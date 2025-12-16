@@ -14,7 +14,7 @@ function NavBar(props){
     const handleFilter = (event) => {
         setFilter(event.target.value)
     }
-
+    
     return(
         <div className='nav-bar'>
             <h1>My Shelf</h1>
@@ -26,6 +26,7 @@ function NavBar(props){
                     setSearchTerm(searchTerm.replaceAll(' ', '+'))
                     event.preventDefault()
                     props.onSearchBooks({filter,searchTerm})
+                    console.log(`Filter: ${filter}, Term: ${searchTerm}`)
                     setSearchTerm(searchTerm.replaceAll('+', ' '))
                 }}>
                     <select name='options' id='searchBy' onChange={handleFilter}>
