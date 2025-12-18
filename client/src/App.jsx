@@ -80,6 +80,70 @@ function App() {
     await fetchWish()
   }
 
+  const putRating = async (id) => {
+    try{
+      let newRating = prompt('Enter new rating 0 - 5 stars:')
+
+      if ((Number.isInteger(parseInt(newRating, 10))) && (newRating >= 0) && (newRating <= 5)){
+        const response = await fetch(`/library/rating/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({id: id, rating: newRating})
+        })
+        console.log(response)
+      }
+      else{
+        alert('Invalid Rating')
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+    await fetchMain()
+    await fetchWish()
+  }
+
+  const putList = async (id) => {
+    try{      
+      console.log(id)
+      const response = await fetch(`/library/${id}`)
+      const jsonData = await response.json()
+      console.log(jsonData)
+      const currList = jsonData[0].shelf
+      console.log(currList)
+
+      if (currList == 'main'){
+        //switch main to wish
+        const res = await fetch(`/library/shelf/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({id: id, shelf: 'wish'})
+        })
+        console.log(response)
+      }
+      else{
+        //switch wish to main
+        const res = await fetch(`/library/shelf/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({id: id, shelf: 'main'})
+        })
+        console.log(response)
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+    await fetchMain()
+    await fetchWish()
+  }
+
   useEffect(() => {
     fetchMain()
     fetchWish()
@@ -90,8 +154,8 @@ function App() {
       <NavBar onSearchBooks={searchBooks}/>
       <div>
         <SearchResults searchData={searchResult} addToLibrary={postBook} />
-        <Shelf shelfName='Library' books={mainLib}/>
-        <Shelf shelfName='Wishlist' books={wish}/>
+        <Shelf shelfName='Library' books={mainLib} editList={putList} editRating={putRating}/>
+        <Shelf shelfName='Wishlist' books={wish} editList={putList} editRating={putRating}/>
       </div>
     </>
   )

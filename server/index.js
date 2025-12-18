@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/library/main', db.getLibrary)
 app.get('/library/wish', db.getWishlist)
+app.get('/library/:id', db.getBook)
 app.post('/library', db.createBook)
 app.put('/library/shelf/:id', db.updateShelf)
 app.put('/library/rating/:id', db.updateRating)

@@ -26,6 +26,15 @@ const getWishlist = (req, res) => {
     })
 }
 
+const getBook = (req, res) => {
+    const id = parseInt(req.params.id)
+    pool.query('SELECT * FROM library WHERE id = $1', [id], (e, result) => {
+        if(e){
+            throw(e)
+        }
+        res.status(200).json(result.rows)
+    })
+}
 
 const createBook = (req, res) => {
     const bookData = req.body.book_data
@@ -76,6 +85,7 @@ const deleteBook = (req, res) => {
 module.exports = {
     getLibrary,
     getWishlist,
+    getBook,
     createBook,
     updateRating,
     updateShelf,

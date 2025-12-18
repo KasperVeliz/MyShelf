@@ -14,10 +14,27 @@
     height: auto;
 }
 
-.book-container {
+.item-container {
     display: flex;
     flex-direction: column;
     height: fit-content;
+    margin: none;
+    justify-items: center;
+}
+
+.rating-button {
+    text-align: center;
+    justify-self: center;
+    background-color: darkgray;
+}
+
+.rating-button:hover {
+    background-color: black;
+    transition: 0.5s;
+}
+
+.delete:hover {
+    background-color: rgb(190, 0, 0);
 }
 
 h3 {

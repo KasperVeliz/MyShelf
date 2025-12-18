@@ -5,29 +5,29 @@ import './Shelf.css'
 function Rating(props){
     const rating = ['-', '-', '-', '-', '-']
 
-    for(let i = -1; i < 4; i++){
-        if(i<props.rating-1){
+    for(let i = 0; i < 5; i++){
+        if(i + 1 <= props.rating){
             rating[i] = '*'
         }
         else{
             rating[i] = '-'
         }
     }
-    return<div className='Rating'>{rating}</div>
+    return rating
 }
 
 function RenderBooks(props){
     const books = props.data.map((item) => {
         return(
-            <div className='book-container' key={item.id}>
+            <div className='item-container' key={item.id}>
                 <Book bookName={item.book_data.title}
                     authorName={item.book_data.author_name[0]}
                     cover_edition_key={item.book_data.cover_edition_key}/>
                 <div className='buttons'>
-                    <button onClick={() => props.remove(item.id)}>Remove</button>
-                    <button onClick={() => props.editRating(item.id)}>Rate</button>
+                    <button className='delete' onClick={() => props.remove(item.id)}>Delete</button>
+                    <button onClick={() => props.editList(item.id)}>Move</button>
                 </div>
-                <Rating rating={item.rating}/>
+                <button className='rating-button' onClick={() => props.editRating(item.id)}>Rating: <Rating rating={item.rating}/></button>
             </div>
         )
     })
@@ -57,7 +57,7 @@ function Shelf(props){
             <div className='title-container'>
                 <h3>{props.shelfName}</h3>
             </div>
-            <RenderBooks data={props.books}/>
+            <RenderBooks data={props.books} remove={props.remove} editRating={props.editRating} editList={props.editList}/>
         </>
         )
     }
