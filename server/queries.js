@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getLibrary = (req, res) => {
-    pool.query("SELECT * FROM library WHERE shelf = $1", ['main'], (e, result) => {
+    pool.query("SELECT * FROM library WHERE shelf = $1 ORDER BY rating DESC", ['main'], (e, result) => {
         if (e){
             throw(e)
         }
@@ -18,7 +18,7 @@ const getLibrary = (req, res) => {
 }
 
 const getWishlist = (req, res) => {
-    pool.query('SELECT * FROM library WHERE shelf = $1', ['wish'], (e, result) => {
+    pool.query('SELECT * FROM library WHERE shelf = $1 ORDER BY rating DESC', ['wish'], (e, result) => {
         if (e){
             throw(e)
         }

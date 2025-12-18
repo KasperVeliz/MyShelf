@@ -106,13 +106,10 @@ function App() {
   }
 
   const putList = async (id) => {
-    try{      
-      console.log(id)
+    try{
       const response = await fetch(`/library/${id}`)
       const jsonData = await response.json()
-      console.log(jsonData)
       const currList = jsonData[0].shelf
-      console.log(currList)
 
       if (currList == 'main'){
         //switch main to wish
@@ -144,6 +141,22 @@ function App() {
     await fetchWish()
   }
 
+  const removeBook = async (id) => {
+    try{
+      const response = await fetch(`/library/${id}`, {
+        method: 'DELETE',
+      })
+      if (response.ok) {
+        console.log(`Deleted book with id: ${id}`)
+      }
+    }
+    catch(error){
+      console.log(error)
+    }
+    await fetchMain()
+    await fetchWish()
+  }
+
   useEffect(() => {
     fetchMain()
     fetchWish()
@@ -154,8 +167,8 @@ function App() {
       <NavBar onSearchBooks={searchBooks}/>
       <div>
         <SearchResults searchData={searchResult} addToLibrary={postBook} />
-        <Shelf shelfName='Library' books={mainLib} editList={putList} editRating={putRating}/>
-        <Shelf shelfName='Wishlist' books={wish} editList={putList} editRating={putRating}/>
+        <Shelf shelfName='Library' books={mainLib} editList={putList} editRating={putRating} remove={removeBook}/>
+        <Shelf shelfName='Wishlist' books={wish} editList={putList} editRating={putRating} remove={removeBook}/>
       </div>
     </>
   )

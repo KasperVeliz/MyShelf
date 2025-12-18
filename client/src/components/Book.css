@@ -21,7 +21,8 @@
     width: 180px;
 }
 
-img {
+.cover {
+    background-color: black;
     width: 180px;
     height: 288px;
 }

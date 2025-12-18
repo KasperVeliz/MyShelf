@@ -6,10 +6,22 @@ function Book({ cover_edition_key, bookName, authorName }) {
 
     if (!hasCover) {
         return (
-            <div className="book-container placeholder">
-                <span className="title">{bookName || 'Untitled'}</span>
-                <span className="author">{authorName || 'Unknown author'}</span>
+            <>
+            <div className="book-container">
+                <img
+                className="cover"
+                src={'https://m.media-amazon.com/images/I/81MmomTwghL._AC_UF1000,1000_QL80_.jpg'}
+                alt={`${bookName || 'book'} cover`}
+                // crossOrigin="anonymous" // only enable if you need to access image data and the server sets CORS headers
+                onError={(e) => { e.currentTarget.style.display = 'none' }}
+                />
             </div>
+            <div className="meta">
+                <span className="title">{bookName}</span>
+                <br></br>
+                <span className="author">{authorName}</span>
+            </div>
+            </>
         )
     }
 
