@@ -8,32 +8,29 @@ const pool = new Pool({
 })
 
 const getLibrary = (req, res) => {
-    pool.query('SELECT * FROM library WHERE shelf = main;', (e, result) => {
+    pool.query("SELECT * FROM library WHERE shelf = $1", ['main'], (e, result) => {
         if (e){
             throw(e)
         }
-        else{
-            res.status(200).json(result.rows)
-        }
+        res.status(200).json(result.rows)
+        
     })
 }
 
 const getWishlist = (req, res) => {
-    pool.query('SELECT * FROM library WHERE shelf = wish', (e, result) => {
+    pool.query('SELECT * FROM library WHERE shelf = $1', ['wish'], (e, result) => {
         if (e){
             throw(e)
         }
-        else{
-            res.status(200).json(result.rows)
-        }
+        res.status(200).json(result.rows)
     })
 }
 
 
 const createBook = (req, res) => {
-    const bookData = req.body.book
+    const bookData = req.body.book_data
     const shelf = req.body.shelf
-    pool.query('INSERT INTO library (bookData, rating, shelf) VALUE ($1, 0, $2)', [bookData, shelf], (e, result) => {
+    pool.query('INSERT INTO library (book_data, rating, shelf) VALUES ($1, 0, $2)', [bookData, shelf], (e, result) => {
         if (e){
             throw(e)
         }

@@ -5,8 +5,8 @@ import './Shelf.css'
 function Rating(props){
     const rating = ['-', '-', '-', '-', '-']
 
-    for(const i = 0; i < 4; i++){
-        if(i<props.rating){
+    for(let i = -1; i < 4; i++){
+        if(i<props.rating-1){
             rating[i] = '*'
         }
         else{

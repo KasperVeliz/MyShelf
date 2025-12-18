@@ -4,6 +4,7 @@ import SearchResults from './components/SearchResults'
 
 import './App.css'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 function App() {
   const [searchResult, setSearchResult] = useState([])
@@ -34,31 +35,27 @@ function App() {
     }
   }
 
-  const handleSearchBooks = async (search) => {
-    searchBooks(search)
-  }
-
   const fetchMain = async () => {
-    const response = await fetch('/library/main')
-    const jsonData = await response.json()
-    setMain(jsonData)
-    console.log(mainLib)
+    try{
+      const response = await fetch('/library/main')
+      const jsonData = await response.json()
+      setMain(jsonData)
+      console.log(mainLib)
+    }
+    catch(e){
+      console.log(e)
+    }
   }
 
   const fetchWish = async () => {
-    const response = await fetch('/library/wish')
-    const jsonData = await response.json()
-    setWish(jsonData)
-    console.log(wish)
-  }
-
-  const fetchLibrary = async () => {
     try{
-      fetchMain
-      fetchWish
+      const response = await fetch('/library/wish')
+      const jsonData = await response.json()
+      setWish(jsonData)
+      console.log(wish)
     }
-    catch(error){
-      console.log(error)
+    catch(e){
+      console.log(e)
     }
   }
 
@@ -72,25 +69,27 @@ function App() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({book_data: book_data, rating: 0, shelf: shelf})
+        body: JSON.stringify({book_data: book_data, shelf: shelf})
       })
       console.log(response)
     }
     catch(error){
       console.log(error)
     }
-    fetchLibrary()
+    await fetchMain()
+    await fetchWish()
   }
 
-  const addToLibrary = async (params) => {
-    postBook(params)
-  }
+  useEffect(() => {
+    fetchMain()
+    fetchWish()
+  }, [])
 
   return(
     <>
-      <NavBar onSearchBooks={handleSearchBooks}/>
+      <NavBar onSearchBooks={searchBooks}/>
       <div>
-        <SearchResults searchData={searchResult} addToLibrary={addToLibrary} />
+        <SearchResults searchData={searchResult} addToLibrary={postBook} />
         <Shelf shelfName='Library' books={mainLib}/>
         <Shelf shelfName='Wishlist' books={wish}/>
       </div>
