@@ -24,8 +24,8 @@ function RenderBooks(props){
                     authorName={item.book_data.author_name[0]}
                     cover_edition_key={item.book_data.cover_edition_key}/>
                 <div className='buttons'>
-                    <button onClick={() => props.remove(item.id)}>Library</button>
-                    <button onClick={() => props.editRating(item.id)}>Wishlist</button>
+                    <button onClick={() => props.remove(item.id)}>Remove</button>
+                    <button onClick={() => props.editRating(item.id)}>Rate</button>
                 </div>
                 <Rating rating={item.rating}/>
             </div>
