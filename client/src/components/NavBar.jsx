@@ -33,7 +33,7 @@ function NavBar(props){
                         <option value='title'>Title</option>
                         <option value='author'>Author</option>
                     </select>
-                    <input className='search-bar' type='text' id='search-term' value={searchTerm} onChange={handleInput} placeholder='Search'/>
+                    <input className='search-bar' type='text' id='search-term' value={searchTerm} onChange={handleInput} placeholder='Search' autoComplete='off'/>
                     <input id='submit' type='submit' value='Search'/>
                 </form>
             </div>
