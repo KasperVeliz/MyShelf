@@ -6,8 +6,9 @@ import './App.css'
 import { useState } from 'react'
 
 function App() {
-
   const [searchResult, setSearchResult] = useState([])
+  const [mainLib, setMain] = useState([])
+  const [wish, setWish] = useState([])
 
   const searchBooks = async (search) => {
     const filter = search.filter
@@ -33,17 +34,65 @@ function App() {
     }
   }
 
-  const handleSearchBooks = async(search) => {
+  const handleSearchBooks = async (search) => {
     searchBooks(search)
+  }
+
+  const fetchMain = async () => {
+    const response = await fetch('/library/main')
+    const jsonData = await response.json()
+    setMain(jsonData)
+    console.log(mainLib)
+  }
+
+  const fetchWish = async () => {
+    const response = await fetch('/library/wish')
+    const jsonData = await response.json()
+    setWish(jsonData)
+    console.log(wish)
+  }
+
+  const fetchLibrary = async () => {
+    try{
+      fetchMain
+      fetchWish
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+  const postBook = async (params) => {
+    try{
+      const book_data = params.book
+      const shelf = params.shelf
+
+      const response = await fetch('/library', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({book_data: book_data, rating: 0, shelf: shelf})
+      })
+      console.log(response)
+    }
+    catch(error){
+      console.log(error)
+    }
+    fetchLibrary()
+  }
+
+  const addToLibrary = async (params) => {
+    postBook(params)
   }
 
   return(
     <>
       <NavBar onSearchBooks={handleSearchBooks}/>
       <div>
-        <SearchResults searchData={searchResult}/>
-        <Shelf shelfName='Library'/>
-        <Shelf shelfName='Wishlist'/>
+        <SearchResults searchData={searchResult} addToLibrary={addToLibrary} />
+        <Shelf shelfName='Library' books={mainLib}/>
+        <Shelf shelfName='Wishlist' books={wish}/>
       </div>
     </>
   )

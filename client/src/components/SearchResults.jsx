@@ -9,8 +9,8 @@ function ResultList(props){
                     authorName={book.author_name[0]}
                     cover_edition_key={book.cover_edition_key}/>
                 <div className='buttons'>
-                    <button onClick={() => props.addToMain()}>Library</button>
-                    <button onClick={() => props.addToWish()}>Wishlist</button>
+                    <button onClick={() => props.addToLibrary({book: book, shelf: 'main'})}>Library</button>
+                    <button onClick={() => props.addToLibrary({book: book, shelf: 'wish'})}>Wishlist</button>
                 </div>
             </div>
         )
@@ -28,7 +28,7 @@ function SearchResults (props) {
         return(
             <>
                 <h2>Search Results</h2>
-                <ResultList data={data} addToMain={props.addToMain} addToWish={props.addToWish}/>
+                <ResultList data={data} addToLibrary={props.addToLibrary}/>
             </>
         )
     }

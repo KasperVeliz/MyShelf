@@ -1,5 +1,10 @@
 .shelf-container, .title-container {
     background-color: grey;
+    width: 60vw;
+}
+
+.title-container {
+    text-align: center;
 }
 
 .shelf-container {
