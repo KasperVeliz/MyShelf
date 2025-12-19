@@ -17,19 +17,41 @@ function Rating(props){
 }
 
 function RenderBooks(props){
+    let numBooks = 0
     const books = props.data.map((item) => {
-        return(
-            <div className='item-container' key={item.id}>
-                <Book bookName={item.book_data.title}
-                    authorName={item.book_data.author_name[0]}
-                    cover_edition_key={item.book_data.cover_edition_key}/>
-                <div className='buttons'>
-                    <button className='delete' onClick={() => props.remove(item.id)}>Delete</button>
-                    <button onClick={() => props.editList(item.id)}>Move</button>
+        numBooks += 1
+        if (numBooks%4 == 0){
+            return(
+                <>
+                <div className='item-container' key={item.id}>
+                    <Book bookName={item.book_data.title}
+                        authorName={item.book_data.author_name[0]}
+                        cover_edition_key={item.book_data.cover_edition_key}/>
+                    <div className='buttons'>
+                        <button className='delete' onClick={() => props.remove(item.id)}>Delete</button>
+                        <button onClick={() => props.editList(item.id)}>Move</button>
+                    </div>
+                    <button className='rating-button' onClick={() => props.editRating(item.id)}>Rating: <Rating rating={item.rating}/></button>
                 </div>
-                <button className='rating-button' onClick={() => props.editRating(item.id)}>Rating: <Rating rating={item.rating}/></button>
-            </div>
-        )
+                <br>
+                </br>
+                </>
+            )
+        }
+        else{
+            return(
+                <div className='item-container' key={item.id}>
+                    <Book bookName={item.book_data.title}
+                        authorName={item.book_data.author_name[0]}
+                        cover_edition_key={item.book_data.cover_edition_key}/>
+                    <div className='buttons'>
+                        <button className='delete' onClick={() => props.remove(item.id)}>Delete</button>
+                        <button onClick={() => props.editList(item.id)}>Move</button>
+                    </div>
+                    <button className='rating-button' onClick={() => props.editRating(item.id)}>Rating: <Rating rating={item.rating}/></button>
+                </div>
+            )
+        }
     })
     return <div className='shelf-container'>{books}</div>
 }
