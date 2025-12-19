@@ -1,10 +1,6 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-    user: 'admin',
-    host: 'localhost',
-    database: 'myshelf',
-    password: 'GRAdm1n',
-    port: 5432,
+    connectionString: process.env.DATABASE_URL
 })
 
 const getLibrary = (req, res) => {
